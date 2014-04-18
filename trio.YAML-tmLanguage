@@ -1,0 +1,255 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
+---
+name: Trio
+scopeName: source.trio
+fileTypes: [trio]
+uuid: f2932f90-87dd-439e-9e78-6ed24e413724
+
+patterns:
+
+- include: '#comment_block'
+- include: '#comment_line'
+
+- name: entity
+  begin: (^class)\ ([A-Z][A-Za-z0-9]*)
+  beginCaptures:
+        '1': {name: keyword.other}
+        '2': {name: entity.name.function}
+  end: (^end)
+  endCaptures:
+        '1': {name: keyword.other}
+  patterns:
+    - include: '#comment_block'
+    - include: '#comment_line'
+    - include: '#parameter_round'
+    - include: '#import'
+    - include: '#signature'
+    - include: '#visible'
+    - include: '#temporaldomain'
+    - include: '#domains'
+    - include: '#modules'
+    - include: '#connections'
+    - include: '#items'
+    - include: '#item_def'
+    - include: '#event_state'
+    - include: '#axioms'
+    - include: '#vars'
+    - include: '#formulae'
+    - include: '#definition'
+    - include: '#nCapName'
+    - include: '#capName'
+    - include: '#illegal'
+
+- include: '#illegal'
+
+repository:
+  comment_block:
+    name: comment.block
+    #name: string
+    begin: (\/\*)
+    end: (\*\/)
+    comment: comment block
+  
+  comment_line:
+    name: comment.line.lol
+    match: \/\/.*
+    comment: comment line
+
+  import:
+    name: entity
+    begin: (import)
+    beginCaptures:
+      '1': {name: keyword.other}
+    end: (\;)
+    endCaptures:
+      '1': {name: keyword.other}
+    patterns:
+      - include: '#comment_block'
+      - include: '#comment_line'
+      - include: '#capName'
+
+  signature:
+    name: keyword.other
+    match: (signature\:)
+      
+  visible:
+    name: entity
+    begin: (visible\:)
+    beginCaptures:
+      '1': {name: keyword.other}
+    end: (\;)
+    endCaptures:
+      '1': {name: keyword.other}
+    patterns:
+      - include: '#comment_block'
+      - include: '#comment_line'
+      - include: '#nCapName'
+
+  temporaldomain:
+    name: entity
+    begin: (temporal\ domain\:)
+    beginCaptures:
+      '1': {name: keyword.other}
+    end: (\;)
+    endCaptures:
+      '1': {name: keyword.other}
+    patterns:
+      - include: '#comment_block'
+      - include: '#comment_line'
+      - include: '#nCapName'
+
+  domains:
+    name: keyword.other
+    match: (domains\:)          
+
+  modules:
+    name: keyword.other
+    match: (modules\:)
+
+  connections:
+    name: keyword.other
+    match: (connections\:)
+
+  items:
+    name: keyword.other
+    match: (items\:)
+
+  axioms:
+    name: keyword.other
+    match: (axioms\:)
+
+  vars:
+    name: keyword.other
+    match: (vars\:)
+
+  formulae:
+    name: keyword.other
+    match: (formulae\:)
+
+  item_def:
+    name: entity
+    begin: ((TD\ total)|(TI\ total))(\ )+([a-z][A-Za-z0-9]*)(\:)
+    beginCaptures:
+      '1': {name: support.type}
+      '2': {name: support.type}
+      '5': {name: string}
+    end: (\;)
+    endCaptures:
+      '1': {name: keyword.other}
+    patterns:
+      - include: '#comment_block'
+      - include: '#comment_line'
+      - include: '#nCapName'
+      - include: '#capName'
+
+  event_state:
+    name: entity
+    begin: ((event)|(state))(\ )+
+    beginCaptures:
+      '1': {name: support.type}
+      '2': {name: support.type}
+    end: (\;)
+    endCaptures:
+      '1': {name: keyword.other}
+    patterns:
+      - include: '#nCapName'
+      - include: '#capName'
+      - include: '#rpar'
+      - include: '#illegal'
+
+  definition:
+    name: entity
+    begin: ([a-z][A-Za-z0-9]*\:)
+    beginCaptures:
+      '1': {name: string}
+    end: (\;)
+    endCaptures:
+      '1': {name: keyword.other}
+    patterns:
+      - include: '#comment_block'
+      - include: '#comment_line'
+      - include: '#trio'
+      - include: '#enum'
+      - include: '#nCapName'
+      - include: '#capName'
+      - include: '#parameter_square'
+      - include: '#numeric_domain'
+
+  enum:
+    name: entity
+    begin: (\{)
+    beginCaptures:
+      '1': {name: keyword.other}
+    end: (\})
+    endCaptures:
+      '1': {name: keyword.other}
+    patterns:
+      - name: string
+        match: ([A-Za-z0-9]+)
+      - include: '#comment_block'
+
+  parameter_square:
+    name: entity
+    begin: (\[)
+    beginCaptures:
+      '1': {name: keyword.other}
+    end: (\])
+    endCaptures:
+      '1': {name: keyword.other}
+    patterns:
+      - name: keyword.other
+        match: (is\ const)
+
+      - name: string
+        match: ([A-Za-z0-9]+)
+
+      - include: '#comment_block'
+
+  parameter_round:
+    name: entity
+    begin: (\()
+    beginCaptures:
+      '1': {name: entity}
+    end: (\))
+    endCaptures:
+      '1': {name: entity}
+    patterns:
+      - name: keyword.other
+        match: (const)
+        
+      - include: '#comment_block'
+
+  illegal:
+    name: invalid.illegal.unrecognized
+    match: '[^\s}]'
+
+  capName:
+    name: entity.name.function
+    match: ([A-Z][A-Za-z0-9]*)
+
+  nCapName:
+    name: variable.parameter
+    match: ([a-z][A-Za-z0-9]*)
+
+  number:
+    name: constant.numeric
+    match: ([0-9]+)
+
+  rpar:
+    name: entity
+    begin: (\()
+    end: (\))
+    patterns:
+      - include: '#capName'
+      - include: '#nCapName'
+
+  numeric_domain:
+    name: constant.numeric
+    match: ([0-9]+)..([0-9]+)
+
+  trio:
+    name: support.type
+    match: (\<)|(\>)|(\-\>)|(\<\-\>)|(\=)|(Futr)|(Past)|(Lasts)|(Lasted)|(Since)|(Alw)|(Some)|(Within)|(UpToNow)|(Becomes)|(NextTime)|(Until)|(Since)
+
+
+...
