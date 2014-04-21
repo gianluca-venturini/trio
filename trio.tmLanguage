@@ -627,7 +627,7 @@
 		<key>trio</key>
 		<dict>
 			<key>match</key>
-			<string>(\&lt;)|(\&gt;)|(\-\&gt;)|(\&lt;\-\&gt;)|(\=)|(Futr)|(Past)|(Lasts)|(Lasted)|(Since)|(Alw)|(Some)|(Within)|(UpToNow)|(Becomes)|(NextTime)|(Until)|(Since)</string>
+			<string>(\&lt;)|(\&gt;)|(\-\&gt;)|(\&lt;\-\&gt;)|(\=)|(\&amp;)|(\|)|(Dist)|(Futr)|(Past)|(Lasts)|(Lasted)|(Since)|(AlwP)|(AlwF)|(Alw)|(SomP)|(SomF)|(Som)|(WithinP)|(WithinF)|(UpToNow)|(Becomes)|(NextTime)|(Until)|(Since)</string>
 			<key>name</key>
 			<string>support.type</string>
 		</dict>

@@ -249,7 +249,7 @@ repository:
 
   trio:
     name: support.type
-    match: (\<)|(\>)|(\-\>)|(\<\-\>)|(\=)|(Futr)|(Past)|(Lasts)|(Lasted)|(Since)|(Alw)|(Some)|(Within)|(UpToNow)|(Becomes)|(NextTime)|(Until)|(Since)
+    match: (\<)|(\>)|(\-\>)|(\<\-\>)|(\=)|(\&)|(\|)|(Dist)|(Futr)|(Past)|(Lasts)|(Lasted)|(Since)|(AlwP)|(AlwF)|(Alw)|(SomP)|(SomF)|(Som)|(WithinP)|(WithinF)|(UpToNow)|(Becomes)|(NextTime)|(Until)|(Since)
 
 
 ...
