@@ -21,6 +21,7 @@ patterns:
   patterns:
     - include: '#comment_block'
     - include: '#comment_line'
+    - include: '#item_def'
     - include: '#parameter_round'
     - include: '#import'
     - include: '#signature'
@@ -29,8 +30,7 @@ patterns:
     - include: '#domains'
     - include: '#modules'
     - include: '#connections'
-    - include: '#items'
-    - include: '#item_def'
+    - include: '#items'    
     - include: '#event_state'
     - include: '#axioms'
     - include: '#vars'
@@ -128,7 +128,7 @@ repository:
 
   item_def:
     name: entity
-    begin: ((TD\ total)|(TI\ total))(\ )+([a-z][A-Za-z0-9]*)(\:)
+    begin: ((TD\ total)|(TI\ total))(\ )+([a-zA-Z][A-Za-z0-9]*)(\:)
     beginCaptures:
       '1': {name: support.type}
       '2': {name: support.type}
@@ -139,8 +139,8 @@ repository:
     patterns:
       - include: '#comment_block'
       - include: '#comment_line'
-      - include: '#nCapName'
       - include: '#capName'
+      - include: '#nCapName'
 
   event_state:
     name: entity
@@ -159,7 +159,7 @@ repository:
 
   definition:
     name: entity
-    begin: ([a-z][A-Za-z0-9]*\:)
+    begin: ([A-Za-z0-9\,\ ]*\:)
     beginCaptures:
       '1': {name: string}
     end: (\;)
@@ -170,8 +170,8 @@ repository:
       - include: '#comment_line'
       - include: '#trio'
       - include: '#enum'
-      - include: '#nCapName'
       - include: '#capName'
+      - include: '#nCapName'
       - include: '#parameter_square'
       - include: '#numeric_domain'
 
@@ -245,11 +245,11 @@ repository:
 
   numeric_domain:
     name: constant.numeric
-    match: ([0-9]+)..([0-9]+)
+    match: ([0-9]+)\.\.([0-9]+)
 
   trio:
     name: support.type
-    match: (\<)|(\>)|(\-\>)|(\<\-\>)|(\=)|(\&)|(\|)|(Dist)|(Futr)|(Past)|(Lasts)|(Lasted)|(Since)|(AlwP)|(AlwF)|(Alw)|(SomP)|(SomF)|(Som)|(WithinP)|(WithinF)|(UpToNow)|(Becomes)|(NextTime)|(Until)|(Since)
+    match: (\<)|(\>)|(\-\>)|(\<\-\>)|(\=)|(\&)|(\|)|(Dist)|(Futr)|(Past)|(Lasts)|(Lasted)|(Since)|(AlwP)|(AlwF)|(Alw)|(SomP)|(SomF)|(Som)|(WithinP)|(WithinF)|(UpToNow)|(Becomes)|(NextTime)|(LastTime)|(Until)|(Since)
 
 
 ...
