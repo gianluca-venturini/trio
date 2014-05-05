@@ -181,7 +181,7 @@
 		<key>definition</key>
 		<dict>
 			<key>begin</key>
-			<string>([A-Za-z0-9\,\ ]*\:)</string>
+			<string>([a-z][A-Za-z0-9\,\ ]*\:)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>

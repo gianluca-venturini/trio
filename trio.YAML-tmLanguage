@@ -159,7 +159,7 @@ repository:
 
   definition:
     name: entity
-    begin: ([A-Za-z0-9\,\ ]*\:)
+    begin: ([a-z][A-Za-z0-9\,\ ]*\:)
     beginCaptures:
       '1': {name: string}
     end: (\;)
